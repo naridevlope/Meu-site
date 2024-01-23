@@ -197,7 +197,7 @@ const saveThemeLocalStorage = () => {
 const loadThemeLocalStorage = () => {
     const theme = getThemeLocalStorage();
     if (theme.light) {
-        darkThemeBtn.cheked = false;
+        darkThemeBtn.checked = false;
         buttonTheme('light');
     } else {
         darkThemeBtn.checked = true;
