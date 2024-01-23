@@ -106,8 +106,12 @@ const darkThemeBtn = document.querySelector("#theme-btn");
 darkThemeBtn.addEventListener("change", () => {
     if (darkThemeBtn.checked) {
         buttonTheme('dark');
+        saveThemeLocalStorage(theme.dark = true);
+        saveThemeLocalStorage(theme.light = false);
     } else {
         buttonTheme('light');
+        saveThemeLocalStorage(theme.light = true);
+        saveThemeLocalStorage(theme.dark = false);
     }
     
 });
@@ -152,7 +156,7 @@ function buttonTheme (theme) {
             about.classList.add("about-container-dark");
             titlePresentationDev.classList.add("title-animation-dark");
             sun.classList.add("hide");
-            moon.classList.remove("hide"); // Remova a classe 'hide' do moon se necessário
+            moon.classList.remove("hide"); 
             break;
 
         case 'light':
@@ -171,164 +175,35 @@ function buttonTheme (theme) {
             moon.classList.add("hide");
             break;
             
-    }
+    }   
+}
+// System local storage 
+const theme = {
+    light: true,
+    dark: false
+};
+
+
+ const getThemeLocalStorage = () => {
+    const getTheme = JSON.parse(localStorage.getItem('theme') || "{}");
+    return getTheme;
     
 }
+
+const saveThemeLocalStorage = () => {
+    localStorage.setItem('theme', JSON.stringify(theme));
     
-
-
-// function buttonThemeOff () {
-
-// }
-
-
-
-function darkThemeBackgroundOn(dark) {
-    const backgroundBody = document.querySelector("body");
-    const backgroundDescriptionSkills = document.querySelector(".description-skills");
-    const backgroundAboutMe = document.querySelector(".about-me");
-    
-    
-    const input = document.querySelector("#theme-btn");
-    input.checked ? dark = true : dark = false;
-
-    switch (dark) {
-        case true:
-            case true:
-                const colorSelectors = {
-                    header: document.querySelector(".nav-header"),
-                    nameH2: document.querySelector("#home-container h2"),
-                    communication: document.querySelector(".communication-desc p"),
-                    communicationH3: document.querySelector(".communication-desc h3"),
-                    solution: document.querySelector(".solution-description p"),
-                    solutionH3: document.querySelector(".solution-description h3"),
-                    results: document.querySelector(".results p"),
-                    resultsH3: document.querySelector(".results h3"),
-                    aboutMe: document.querySelector(".about-me p"),
-                    hobbies: document.querySelector(".hobbies"),
-                    aboutMeH2: document.querySelector(".about-me h2"),
-                    aboutMeH3: document.querySelector(".about-me h3"),
-                    imageAbout: document.querySelector("#about-container img"),
-                }
-                
-                colorSelectors.header.style.background = "#555";
-                colorSelectors.nameH2.style.color = "#f4f4fc";
-                colorSelectors.communication.style.color = "#f4f4fc";
-                colorSelectors.communicationH3.style.color = "#f4f4fc";
-                colorSelectors.solution.style.color = "#f4f4fc";
-                colorSelectors.solutionH3.style.color = "#f4f4fc";
-                colorSelectors.results.style.color = "#f4f4fc";
-                colorSelectors.resultsH3.style.color = "#f4f4fc";
-                colorSelectors.aboutMeH2.style.color = "#f4f4fc";
-                colorSelectors.aboutMeH3.style.color = "#f4f4fc";
-                colorSelectors.aboutMe.style.color = "#f4f4fc";
-                colorSelectors.hobbies.style.color = "#f4f4fc";
-                colorSelectors.imageAbout.style.background = "#f4f4fc";
-                colorSelectors.imageAbout.style.border = "2px solid #555";
-                backgroundBody.style.background = "#232323";
-                backgroundDescriptionSkills.style.background = "#555";
-                backgroundAboutMe.style.background = "#232323";
-                backgroundAboutMe.style.border = "2px solid #555";
-                const buttonsNavHeader = () => {
-                    // Seleciona todos os botões dentro do elemento com a classe ".nav-header"
-                    const buttons = document.querySelectorAll(".nav-header button");
-                
-                    // Percorrer sobre cada botão e alterar a cor para "#f4f4fc"
-                    buttons.forEach(button => {
-                        button.style.color = "#f4f4fc";
-                    });
-                }
-                
-                // Chama a function para aplicar as alterações nos botões
-                buttonsNavHeader();
-                
-                const backgroundLinks = () => {
-                    const bg = document.querySelectorAll("#socials-media-container button");
-                    bg.forEach(link => {
-                        link.style.background = "#f4f4fc";
-                        link.style.borderRadius = "100px";
-                    });
-                }
-                backgroundLinks();
-                const iconDarkTheme = document.querySelector("#sol");
-                iconDarkTheme.style.display = "none";
-                const bold = document.querySelector(".solution-description b");
-                bold.style.color = "#fff"
-                
-                break;
-            case false:
-                darkThemeBackgroundOff();
-                break;
+}
+const loadThemeLocalStorage = () => {
+    const theme = getThemeLocalStorage();
+    if (theme.light) {
+        darkThemeBtn.cheked = false;
+        buttonTheme('light');
+    } else {
+        darkThemeBtn.checked = true;
+        buttonTheme('dark')
     }
-
 }
 
-function darkThemeBackgroundOff () {
-    const backgroundBody = document.querySelector("body");
-    const backgroundDescriptionSkills = document.querySelector(".description-skills");
-    const backgroundAboutMe = document.querySelector(".about-me");
-
-    const colorSelectors = {
-        header: document.querySelector(".nav-header"),
-        nameH2: document.querySelector("#home-container h2"),
-        communication: document.querySelector(".communication-desc p"),
-        communicationH3: document.querySelector(".communication-desc h3"),
-        solution: document.querySelector(".solution-description p"),
-        solutionH3: document.querySelector(".solution-description h3"),
-        results: document.querySelector(".results p"),
-        resultsH3: document.querySelector(".results h3"),
-        aboutMe: document.querySelector(".about-me p"),
-        hobbies: document.querySelector(".hobbies"),
-        aboutMeH2: document.querySelector(".about-me h2"),
-        aboutMeH3: document.querySelector(".about-me h3"),
-        imageAbout: document.querySelector("#about-container img"),
-    }
-    
-    colorSelectors.header.style.background = "#ededf1";
-    colorSelectors.nameH2.style.color = "#232323";
-    colorSelectors.communication.style.color = "#232323";
-    colorSelectors.communicationH3.style.color = "#232323";
-    colorSelectors.solution.style.color = "#232323";
-    colorSelectors.solutionH3.style.color = "#232323";
-    colorSelectors.results.style.color = "#232323";
-    colorSelectors.resultsH3.style.color = "#232323";
-    colorSelectors.aboutMeH2.style.color = "#232323";
-    colorSelectors.aboutMeH3.style.color = "#232323";
-    colorSelectors.aboutMe.style.color = "#232323";
-    colorSelectors.hobbies.style.color = "#232323";
-    colorSelectors.imageAbout.style.background = "#232323";
-    colorSelectors.imageAbout.style.border = "2px solid #232323";
-    backgroundBody.style.background = "#f4f4fc";
-    backgroundDescriptionSkills.style.background = "#ededf1";
-    backgroundAboutMe.style.background = "#ededf1";
-    backgroundAboutMe.style.border = "2px solid #232323";
-    const buttonsNavHeader = () => {
-        
-        const buttons = document.querySelectorAll(".nav-header button");
-    
-        
-        buttons.forEach(button => {
-            button.style.color = "#232323";
-        });
-    }
-    
-    
-    buttonsNavHeader();
-    
-    const backgroundLinks = () => {
-        const bg = document.querySelectorAll("#socials-media-container button");
-        bg.forEach(link => {
-            link.style.background = "#f4f4fc";
-            link.style.borderRadius = "100px";
-        });
-    }
-    backgroundLinks();
-    const iconDarkTheme = document.querySelector("#sol");
-    iconDarkTheme.style.display = "block";
-    const iconLightTheme = document.querySelector("#lua");
-    iconLightTheme.style.display = "none"
-    const bold = document.querySelector(".solution-description b");
-    bold.style.color = "#232323";
-
-}
-
+getThemeLocalStorage();
+loadThemeLocalStorage();
