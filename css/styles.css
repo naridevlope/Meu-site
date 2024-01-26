@@ -776,9 +776,10 @@ label svg.moon {
     header {
         background-color: transparent;
         margin: 0;   
-        width: 100vw;
+        width: 100%;
         position: fixed;
-        top: auto;
+        z-index: 3;
+        
         
     }
 
@@ -850,6 +851,7 @@ label svg.moon {
     .presentation {
         height: auto;
         margin-left: 30%;
+        width: 405px;
     }
     
     .presentation h2 { 
